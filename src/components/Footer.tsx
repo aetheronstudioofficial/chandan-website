@@ -51,7 +51,7 @@ export default function Footer() {
               <a
                 href="https://instagram.com"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="Instagram Page"
                 className="p-2.5 bg-white/5 hover:bg-brand-red/15 border border-white/5 hover:border-brand-red/25 text-gray-400 hover:text-white rounded-xl transition-all duration-300"
               >
@@ -60,7 +60,7 @@ export default function Footer() {
               <a
                 href="https://twitter.com"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="Twitter Account"
                 className="p-2.5 bg-white/5 hover:bg-brand-red/15 border border-white/5 hover:border-brand-red/25 text-gray-400 hover:text-white rounded-xl transition-all duration-300"
               >
@@ -69,7 +69,7 @@ export default function Footer() {
               <a
                 href="https://facebook.com"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="Facebook Page"
                 className="p-2.5 bg-white/5 hover:bg-brand-red/15 border border-white/5 hover:border-brand-red/25 text-gray-400 hover:text-white rounded-xl transition-all duration-300"
               >
@@ -78,7 +78,7 @@ export default function Footer() {
               <a
                 href="https://youtube.com"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="YouTube Channel"
                 className="p-2.5 bg-white/5 hover:bg-brand-red/15 border border-white/5 hover:border-brand-red/25 text-gray-400 hover:text-white rounded-xl transition-all duration-300"
               >

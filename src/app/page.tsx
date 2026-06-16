@@ -1,16 +1,19 @@
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Stats from '@/components/Stats';
 import About from '@/components/About';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import Programs from '@/components/Programs';
-import Membership from '@/components/Membership';
-import Trainers from '@/components/Trainers';
-import BmiCalculator from '@/components/BmiCalculator';
-import Gallery from '@/components/Gallery';
-import Testimonials from '@/components/Testimonials';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+
+// Dynamically import below-the-fold sections to reduce initial bundle size
+const Programs = dynamic(() => import('@/components/Programs'));
+const Membership = dynamic(() => import('@/components/Membership'));
+const Trainers = dynamic(() => import('@/components/Trainers'));
+const BmiCalculator = dynamic(() => import('@/components/BmiCalculator'));
+const Gallery = dynamic(() => import('@/components/Gallery'));
+const Testimonials = dynamic(() => import('@/components/Testimonials'));
+const Contact = dynamic(() => import('@/components/Contact'));
+const Footer = dynamic(() => import('@/components/Footer'));
 
 export default function Home() {
   return (

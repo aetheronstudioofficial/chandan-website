@@ -1,13 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { pricingPlans } from '@/data/gymData';
 import { Check, Dumbbell } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 export default function Membership() {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -71,8 +69,6 @@ export default function Membership() {
               <motion.div
                 key={plan.id}
                 variants={cardVariants}
-                onMouseEnter={() => setHoveredCard(plan.id)}
-                onMouseLeave={() => setHoveredCard(null)}
                 className={cn(
                   "relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-500 border overflow-hidden",
                   isPremium 

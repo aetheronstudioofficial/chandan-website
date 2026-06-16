@@ -56,6 +56,10 @@ export default function RootLayout({
       className={`${bebasNeue.variable} ${poppins.variable} dark scroll-smooth h-full antialiased`}
       style={{ colorScheme: "dark" }}
     >
+      <head>
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full bg-[#0B0B0B] text-white font-body selection:bg-[#E63946] selection:text-white">
         {children}
       </body>

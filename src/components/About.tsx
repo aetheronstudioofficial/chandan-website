@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Calendar, ShieldAlert, Award, Star } from 'lucide-react';
 
@@ -59,9 +60,12 @@ export default function About() {
               className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10"
             >
               {/* Primary Image */}
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=800&auto=format&fit=crop"
-                alt="Gym Interior"
+                alt="Jagdishpur Fitness Club gym interior"
+                width={800}
+                height={480}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full h-[350px] md:h-[480px] object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent" />

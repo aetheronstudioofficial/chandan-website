@@ -26,30 +26,44 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+    let rafId = 0;
+    let lastScrolled = isScrolled;
+    let lastActive = activeSection;
 
-      // Determine active section based on scroll position
-      const scrollPosition = window.scrollY + 100;
-      for (const item of navItems) {
-        const targetId = item.href.substring(1);
-        const element = document.getElementById(targetId);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(targetId);
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        const scrolled = window.scrollY > 20;
+        if (scrolled !== lastScrolled) {
+          lastScrolled = scrolled;
+          setIsScrolled(scrolled);
+        }
+
+        // Determine active section based on scroll position
+        const scrollPosition = window.scrollY + 100;
+        for (const item of navItems) {
+          const targetId = item.href.substring(1);
+          const element = document.getElementById(targetId);
+          if (element) {
+            const offsetTop = element.offsetTop;
+            const offsetHeight = element.offsetHeight;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              if (targetId !== lastActive) {
+                lastActive = targetId;
+                setActiveSection(targetId);
+              }
+            }
           }
         }
-      }
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

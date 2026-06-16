@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { trainers } from '@/data/gymData';
 
@@ -68,10 +69,15 @@ export default function Trainers() {
               className="group relative rounded-3xl overflow-hidden bg-brand-gray border border-white/5 shadow-2xl flex flex-col h-[480px]"
             >
               {/* Trainer Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 pointer-events-none"
-                style={{ backgroundImage: `url(${trainer.image})` }}
-              />
+              <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105 pointer-events-none">
+                <Image
+                  src={trainer.image}
+                  alt={trainer.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-center"
+                />
+              </div>
 
               {/* Dark Overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent pointer-events-none" />

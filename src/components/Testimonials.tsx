@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { testimonials } from '@/data/gymData';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -120,9 +121,11 @@ export default function Testimonials() {
 
                 {/* User Info */}
                 <div className="flex items-center gap-4">
-                  <img
+                  <Image
                     src={testimonials[activeIndex].image}
                     alt={testimonials[activeIndex].name}
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-brand-red"
                   />
                   <div className="text-left">

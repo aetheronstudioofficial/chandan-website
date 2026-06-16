@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MessageSquare, MapPin, Clock, Send, CheckCircle, Navigation } from 'lucide-react';
-import confetti from 'canvas-confetti';
 import { cn } from '@/utils/cn';
 
 interface FormState {
@@ -25,6 +24,25 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [errors, setErrors] = useState<Partial<FormState>>({});
+  const [showMap, setShowMap] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  // Lazy-load Google Maps iframe when it scrolls into view
+  useEffect(() => {
+    const ref = mapRef.current;
+    if (!ref) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(ref);
+    return () => observer.disconnect();
+  }, []);
 
   const validate = (): boolean => {
     const tempErrors: Partial<FormState> = {};
@@ -63,12 +81,14 @@ export default function Contact() {
     setIsSubmitting(true);
 
     // Simulate API request
-    setTimeout(() => {
+    setTimeout(async () => {
       setIsSubmitting(false);
       setShowToast(true);
       setFormData(initialFormState);
 
-      // Trigger Confetti Blast!
+      // Dynamic import confetti — only loads when actually needed
+      const confettiModule = await import('canvas-confetti');
+      const confetti = confettiModule.default;
       confetti({
         particleCount: 120,
         spread: 80,
@@ -193,21 +213,28 @@ export default function Contact() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
+              ref={mapRef}
               className="relative rounded-3xl overflow-hidden border border-white/5 h-[240px] shadow-2xl group"
             >
-              <iframe
-                title="JFC Location Map"
-                src="https://maps.google.com/maps?q=25.4781803,84.4417092&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="100%"
-                style={{
-                  border: 0,
-                  filter: 'grayscale(1) invert(0.9) contrast(1.1) brightness(0.8)',
-                }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              {showMap ? (
+                <iframe
+                  title="JFC Location Map"
+                  src="https://maps.google.com/maps?q=25.4781803,84.4417092&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    border: 0,
+                    filter: 'grayscale(1) invert(0.9) contrast(1.1) brightness(0.8)',
+                  }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              ) : (
+                <div className="w-full h-full bg-brand-gray flex items-center justify-center text-gray-500 text-sm">
+                  Loading map…
+                </div>
+              )}
               <div className="absolute inset-0 bg-brand-red/5 pointer-events-none group-hover:opacity-0 transition-opacity duration-300" />
             </motion.div>
           </div>

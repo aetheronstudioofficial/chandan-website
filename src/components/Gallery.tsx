@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { galleryItems } from '@/data/gymData';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -109,11 +110,12 @@ export default function Gallery() {
                 className="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-white/5 shadow-xl"
               >
                 {/* Image */}
-                <img
+                <Image
                   src={item.url}
                   alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
                 {/* Hover Overlay */}
@@ -177,9 +179,12 @@ export default function Gallery() {
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-4xl max-h-[80vh] flex flex-col items-center gap-4"
             >
-              <img
+              <Image
                 src={filteredItems[lightboxIndex].url}
                 alt={filteredItems[lightboxIndex].title}
+                width={1200}
+                height={800}
+                sizes="(max-width: 768px) 100vw, 80vw"
                 className="max-w-full max-h-[70vh] object-contain rounded-2xl border border-white/10 shadow-2xl"
               />
               

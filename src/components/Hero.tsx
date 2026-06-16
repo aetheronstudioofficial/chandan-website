@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, Dumbbell, Award, Flame } from 'lucide-react';
 
@@ -33,16 +34,20 @@ export default function Hero() {
       {/* Parallax Background */}
       <motion.div
         style={{ y: bgY }}
-        className="absolute inset-0 z-0 bg-cover bg-center select-none"
+        className="absolute inset-0 z-0 select-none"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5 }}
       >
-        <div
-          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1920&auto=format&fit=crop')`,
-          }}
+        <Image
+          src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1920&auto=format&fit=crop"
+          alt="Jagdishpur Fitness Club gym interior with modern equipment"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIBAAAgIBBAMBAAAAAAAAAAAAAQIDBBEABRIhBiIxQf/EABQBAQAAAAAAAAAAAAAAAAAAAAP/xAAYEQACAwAAAAAAAAAAAAAAAAAAAQISIf/aAAwDAQACEQMRAD8AueLbLDRjuV9ykWRXJRWJRRkA4X6AT+fNanGKNI0jjVUUYVVGAAP2lKVKTP/Z"
         />
         {/* Dark Overlays & Gradients */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-transparent" />
