@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: var(--font-bebas-neue);
+  --font-body: var(--font-poppins);
+
+  --color-brand-black: #0B0B0B;
+  --color-brand-red: #E63946;
+  --color-brand-orange: #FF6B35;
+  --color-brand-gray: #1A1A1A;
+  --color-brand-dark-gray: #121212;
+  --color-brand-light-gray: #2A2A2A;
+
+  --animate-pulse-glow: pulse-glow 3s infinite ease-in-out;
+  --animate-float-slow: float-slow 6s infinite ease-in-out;
+  --animate-float-fast: float-fast 4s infinite ease-in-out;
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(230, 57, 70, 0.3);
+      border-color: rgba(230, 57, 70, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
+      border-color: rgba(255, 107, 53, 0.8);
+    }
+  }
+
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(2deg);
+    }
+  }
+
+  @keyframes float-fast {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(-2deg);
+    }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0B0B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1A1A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E63946;
+}
+
+/* Base resets & utilities */
+body {
+  font-family: var(--font-poppins), sans-serif;
+  overflow-x: hidden;
+  background-color: #0B0B0B;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bebas-neue), sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(26, 26, 26, 0.85);
+  border-color: rgba(230, 57, 70, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(230, 57, 70, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #E63946 0%, #FF6B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-brand {
+  background: linear-gradient(135deg, #E63946 0%, #FF6B35 100%);
+}
+
+.border-gradient-brand {
+  border-image: linear-gradient(135deg, #E63946 0%, #FF6B35 100%) 1;
+}
+
+/* Premium Glow Grid Background */
+.glow-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
